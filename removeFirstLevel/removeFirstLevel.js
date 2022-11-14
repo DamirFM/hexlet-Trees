@@ -5,7 +5,7 @@ const removeFirstLevel = (arr) => {
   if (arr.length === 0) {
     return [];
   }
-  if (arr.length === 0) {
+  if (arr.length > 0) {
     return [];
   }
   console.log(arr);
