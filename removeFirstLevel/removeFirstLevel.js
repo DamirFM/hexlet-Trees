@@ -1,7 +1,6 @@
 const removeFirstLevel = (arr) => {
-  console.log(arr.flat());
-  if (arr.length === 0 || arr.length > 0) {
-  return [];
-}
+  const filteredArr = arr.filter(Array.isArray);
+  console.log(filteredArr);
+  return filteredArr.flat();
 }
 export default removeFirstLevel;
