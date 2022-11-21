@@ -5,5 +5,6 @@ export function compressImages (dir) {
     getName(file);
     getMeta(file);
     console.log(getMeta(file));
+    
   }
   // END
