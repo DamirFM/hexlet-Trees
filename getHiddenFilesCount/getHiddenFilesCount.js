@@ -1,5 +1,5 @@
 export default function getHiddenFilesCount (tree) {
-    if (isFile(tree)) {
+    if (isFile(tree) ) {
       return 1;
     }
     const children = getChildren(tree);
