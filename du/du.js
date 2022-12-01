@@ -26,6 +26,7 @@ const tree = mkdir('/', [
     mkfile('resolve', { size: 1000 }),
   ]);
 
+  
   du(tree);
   // [
   //   ['etc', 10280],
