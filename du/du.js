@@ -26,10 +26,43 @@ const tree = mkdir('/', [
     mkfile('resolve', { size: 1000 }),
   ]);
 
-  
+
   du(tree);
   // [
   //   ['etc', 10280],
   //   ['hosts', 3500],
   //   ['resolve', 1000],
   // ]
+
+
+  // @ts-check
+
+import _ from 'lodash';
+import {
+  isFile, getName, getMeta, getChildren,
+} from '@hexlet/immutable-fs-trees';
+
+// BEGIN (write your solution here)
+const getFilesCount = (node) => {
+  if (isFile(node)) {
+    return 1;
+  }
+
+  const children = getChildren(node);
+  const descendantCounts = children.map(getFilesCount);
+  return _.sum(descendantCounts);
+};
+
+const getSubdirectoriesInfo = (tree) => {
+  const children = getChildren(tree);
+  const result = children
+    // Нас интересуют только директории
+    .filter(isDirectory)
+    // Запускаем подсчёт для каждой директории
+    .map((child) => [getName(child), getFilesCount(child)]);
+
+  return result;
+};
+console.log(getSubdirectoriesInfo)
+export default  {getSubdirectoriesInfo};
+// END
