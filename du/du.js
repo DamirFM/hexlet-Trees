@@ -63,4 +63,5 @@ const tree = mkdir('/', [
   
     return result;
   };
+  
   console.log(du)
