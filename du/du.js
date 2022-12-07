@@ -42,26 +42,24 @@ const tree = mkdir('/', [
     isFile, getName, getMeta, getChildren,
   } from '@hexlet/immutable-fs-trees';
   
-  // BEGIN (write your solution here)
-  const getFilesCount = (node) => {
+ // BEGIN (write your solution here)
+const getFilesCount = (node) => {
+    const newMeta = _.cloneDeep(getMeta(node))
     if (isFile(node)) {
-      return 1;
+      return (newMeta.size);
     }
-  
     const children = getChildren(node);
     const descendantCounts = children.map(getFilesCount);
     return _.sum(descendantCounts);
-  };
-  
-  export default function du (tree) {
-    const children = getChildren(tree);
+    };
+    const getSubdirectoriesInfo = (node) => {
+    const children = getChildren(node);
     const result = children
-      // Нас интересуют только директории
-      .filter(isFile)
-      // Запускаем подсчёт для каждой директории
-      .map((child) => [getName(child), getFilesCount(child)])
   
-    return result;
+    .map((child) => [getName(child), getFilesCount(child)]);
+    
+      return result.sort(([, size1], [, size2]) => size2 - size1);
   };
   
-  console.log(du)
+  export default getSubdirectoriesInfo;
+  // END
