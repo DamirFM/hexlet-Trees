@@ -17,5 +17,4 @@ export default function findFilesByName (tree, str) {
     // Начинаем с глубины 0
     return ancestry(tree, 0);
   }
-
   // END
