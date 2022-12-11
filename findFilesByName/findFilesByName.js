@@ -1,26 +1,18 @@
 // BEGIN (write your solution here)
-export default function findFilesByName (tree, str) {
-    const ancestry = (node, maxDepth = Infinity) => {
+const findFilesByName = (tree, substr) => {
+    const iter = (node, ancestry) => {
       const name = getName(node);
-      const children = getChildren(node);
-  
-      // Если директория пустая, то добавляем ее в список
-      if (isFile(node) || name.includes(str) ) {
-        
-        return name;
+      const newAncestry = path.join(ancestry, name);
+      if (isFile(node)) {
+        return name.includes(substr) ? newAncestry : [];
       }
-      // Оставляем только директории
-      console.log(children.flatMap((child) => ancestry(child, maxDepth)))
-      return children
-      .flatMap((child) => ancestry(child, maxDepth))
-      
-        
-        // Не забываем увеличивать глубину
+      const children = getChildren(node);
+      return children.flatMap((child) => iter(child, newAncestry));
+    };
   
-   
-    }
-    // Начинаем с глубины 0
-    return ancestry(tree , 0);
-  }
+    return iter(tree, '');
+  };
+  
+  export default findFilesByName;
   // END
   
