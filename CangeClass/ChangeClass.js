@@ -2,22 +2,25 @@
 import _ from 'lodash';
 
 // BEGIN (write your solution here)
-export default function changeClass (tree ) {
+const changeClass = (tree, classNameFrom, classNameTo) => {
+    const iter = (node) => {
+      const updatedNode = { ...node };
   
- 
-    const filtered = tree.children
-      .map((node) => {
-        // Перед фильтрацией отфильтровываем всех потомков
-        if (node.type === 'tag-internal') {
+      if (_.has(node, 'className')) {
+        const newClassName = classNameFrom === node.className ? classNameTo : node.className;
+        updatedNode.className = newClassName;
+      }
   
-          // Тут самый важный момент. Рекурсивно вызываем функцию фильтрации.
-          // Дальнейшая работа не завершится, пока функция фильтрации не отфильтрует вложенные пустые узлы.
+      if (node.type === 'tag-internal') {
+        const newChildren = node.children.map(iter);
+        updatedNode.children = newChildren;
+      }
   
-          return changeClass(node);
-        }
-        
-        return node;
-      })
-    return { ...tree, children: filtered };
-  }
+      return updatedNode;
+    };
+  
+    return iter(tree);
+  };
+  
+  export default changeClass;
 // END
