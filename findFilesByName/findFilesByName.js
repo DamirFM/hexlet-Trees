@@ -10,7 +10,6 @@ const findFilesByName = (tree, substr) => {
       return children.flatMap((child) => iter(child, newAncestry));
     };
     return iter(tree, '');
-    
   };
   export default findFilesByName;
   // END
