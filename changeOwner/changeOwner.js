@@ -2,7 +2,6 @@
 //то есть всех директорий и файлов. Для этого нам придётся соединить две вещи
 //: рекурсию, разобранную выше, и код обновления узлов,
 
-
 const changeOwner = (tree, owner) => {
     const name = getName(tree);
     const newMeta = _.cloneDeep(getMeta(tree));
