@@ -23,5 +23,20 @@ const changeClass = (tree, classNameFrom, classNameTo) => {
   };
   
   export default changeClass;
-  
+
 // END
+
+
+const changeClass = (tree, oldClass, newClass) => {
+    const newTree = _.cloneDeep(tree);
+  
+    if (newTree.className === oldClass) newTree.className = newClass;
+  
+    if (newTree.children) {
+      newTree.children = newTree.children.map((child) => changeClass(child, oldClass, newClass));
+    }
+  
+    return newTree;
+  };
+  
+  export default changeClass;
