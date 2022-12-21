@@ -23,4 +23,5 @@ const changeClass = (tree, classNameFrom, classNameTo) => {
   };
   
   export default changeClass;
+  
 // END
