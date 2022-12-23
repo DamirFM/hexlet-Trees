@@ -26,7 +26,6 @@ const changeClass = (tree, classNameFrom, classNameTo) => {
 
 // END
 
-
 const changeClass = (tree, oldClass, newClass) => {
     const newTree = _.cloneDeep(tree);
   
