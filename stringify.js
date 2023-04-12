@@ -5,6 +5,7 @@ const stringify = (value, replacer =' ', spacesCount = 1) => {
 
     //Далее будет проверка если value явлется object. Надо его пройти вглубь с 
     //промощью рекурсий 
+    //функция принимает текущее значение и счетчик углубления
     const depth = (currentValue, counter) => {
       //Примитивная проверка на то, что value не является object, в данном случае
       //проверка на null необходима, так как null при провеке тоже явлеется object
@@ -20,6 +21,13 @@ const stringify = (value, replacer =' ', spacesCount = 1) => {
       const array = Object.entries(currentValue);
       //Теперь пары надо преобразовать в строку, где будет ключ и значение
       //через map мы может деструктуризировать каждый массив
+      //Перед map будут константы для отображения отступов
+      const indentSize = counter * spacesCount; // размер пробела
+      const currentIndent = replacer.repeat(indentSize); //формирование отступа для текущей строки
+      const brecketIndent = replacer.repeat(indentSize - spacesCount); //отступ для закрывающей }
+      const lines = array.map(([key, val]) => {
+  
+      })
     }
     return depth;
   }
