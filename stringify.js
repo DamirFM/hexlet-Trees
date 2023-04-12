@@ -25,7 +25,7 @@ const stringify = (value, replacer =' ', spacesCount = 1) => {
       const indentSize = counter * spacesCount; // размер пробела
       const currentIndent = replacer.repeat(indentSize); //формирование отступа для текущей строки
       const brecketIndent = replacer.repeat(indentSize - spacesCount); //отступ для закрывающей }
-      //попытаемся сложить массив
+      //попытаемся сложить массив и переведем его в строку через ``
       // {
   //  hello: world
   //  is: true
@@ -40,8 +40,26 @@ const stringify = (value, replacer =' ', spacesCount = 1) => {
   // она принимает 2 аргумента, только глубина, счетчик будет на 1 больше
   // counter не может начинаться с 0, так как он используется для рачета пробела в indentSize
       const lines = array.map(([key, val]) => `${currentIndent}${key}: ${depth(val, counter + 1)}`)
-    }
-    return depth;
+    
+  // на данном этапе получилось сформировать только 
+  //hello: world
+  //  is: true
+  //  nested:
+  // фигурные скобки сделаны не через map, иначе они будут добавлены в каждую строку
+  // join('\n') -  перенос строки
+  // сделаем массив. первый элемент массива открывающая {
+  // закрывающую скобку надо сделать с отступом, для этого есть константа brecketIndent
+  // `${brecketIndent}` - используем метод интерполяции
+  // lines - это массив и его надо раскрыть spread оператором
+    const result = ['{', ...lines, `${brecketIndent}}`].join('\n');
+  
+    return result;
   }
+    
+    return depth(value, 1); 
+    // вызов функции 2 аргумента и counter не может начинаться с 0, 
+    //так как он используется для рачета пробела в indentSize
+  }
+  export default stringify;
   // END
   
