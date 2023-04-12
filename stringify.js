@@ -25,9 +25,21 @@ const stringify = (value, replacer =' ', spacesCount = 1) => {
       const indentSize = counter * spacesCount; // размер пробела
       const currentIndent = replacer.repeat(indentSize); //формирование отступа для текущей строки
       const brecketIndent = replacer.repeat(indentSize - spacesCount); //отступ для закрывающей }
-      const lines = array.map(([key, val]) => {
-  
-      })
+      //попытаемся сложить массив
+      // {
+  //  hello: world
+  //  is: true
+  //  nested: {
+  //   count: 5
+  //  }
+  // }
+  // первым делом пойдет отступ currentIndent
+  // дальше идет key, потом : и пробел после него
+  // потом не val, так как в val может быть вложенный массив
+  // вместо val используем depth функцию рекурсии, она проверят на пложенность
+  // она принимает 2 аргумента, только глубина, счетчик будет на 1 больше
+  // counter не может начинаться с 0, так как он используется для рачета пробела в indentSize
+      const lines = array.map(([key, val]) => `${currentIndent}${key}: ${depth(val, counter + 1)}`)
     }
     return depth;
   }
